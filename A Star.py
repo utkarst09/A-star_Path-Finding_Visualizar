@@ -47,6 +47,9 @@ class Spot:
 
     def reset(self):
         return self.color == WHITE
+    
+    def make_start(self):
+        self.color = ORANGE
 
     def make_closed(self):
         self.color = RED
@@ -88,6 +91,16 @@ def make_grid(rows, width):
             grid[i].append(spot)
     return grid
 
-     
-    
+def draw_grid(win, rows, width):
+    gap = width//rows
+    for i in range(rows):
+        pygame.draw.line(win,GREY, (0,i*gap),(width,i*gap))
+        for j in range(rows):
+            pygame.draw.line(win,GREY, (j*gap,0), (j*gap,width))
 
+def draw(win, grid, rows, width):
+    win.fill(WHITE)
+    
+    for row in grid:
+        for spot in row:
+            spot.draw(win)
